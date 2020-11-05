@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="LearningNumbers.Views.HomeView"
+             xmlns:ui="clr-namespace:LearningNumbers.CustomElements"
+             xmlns:utility="clr-namespace:LearningNumbers.Utilities;assembly=LearningNumbers"
+             utility:ViewModelLocator.AutoWireViewModel="True"
+             BackgroundColor="#0f0f0f"
+             Title="Esercita i caloli">
+
+    <ContentPage.Content  Style="{StaticResource defaultFont}">
+        <StackLayout Margin="10">
+           
+            <Grid VerticalOptions="FillAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="3*" />
+                    <RowDefinition />
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition />
+                    <RowDefinition Height="3*" />
+                    <RowDefinition Height="3*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Row="0"
+                       Grid.Column="0"
+                       Grid.ColumnSpan="4"
+                       Text="Segno/i da esercitare"
+                       Style="{StaticResource LargeLabel}">
+                </Label>
+
+
+                <ui:ToggleButton 
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Text="+"
+                        IsToggled="{Binding CanSum, Mode=TwoWay}"
+                        Style="{StaticResource ToggleButtonHeader}"/>
+
+
+
+                <ui:ToggleButton Grid.Row="1"
+                        Grid.Column="1"
+                        Text="-"
+                        IsToggled="{Binding CanSubtract, Mode=TwoWay}"
+                        Style="{StaticResource ToggleButtonHeader}"/>
+
+                <ui:ToggleButton Grid.Row="1"
+                        Grid.Column="2"
+                        Text="×"
+                        IsToggled="{Binding CanMultipilcate, Mode=TwoWay}"
+                        Style="{StaticResource ToggleButtonHeader}"/>
+
+                <ui:ToggleButton Grid.Row="1"
+                        Grid.Column="3"
+                        Text="÷"
+                        IsToggled="{Binding CanDivide, Mode=TwoWay}"         
+                        Style="{StaticResource ToggleButtonHeader}"/>
+
+                <Label Grid.Row="2"
+                       Grid.Column="0"
+                       Grid.ColumnSpan="4"
+                       Text="Numero più grande"
+                       Style="{StaticResource LargeLabel}"/>
+
+                <ui:ToggleButton Grid.Row="3"
+                        Grid.Column="0"
+                        Text="{Binding Minimun}"
+                        IsToggled="{Binding LargestIs10, Mode=TwoWay}"
+                        Style="{StaticResource ToggleButtonLarge}"/>
+
+                <ui:ToggleButton Grid.Row="3"
+                        Grid.Column="1"
+                        Text="{Binding MinimunMedium}"
+                        IsToggled="{Binding LargestIs20, Mode=TwoWay}"
+                        Style="{StaticResource ToggleButtonLarge}"/>
+
+                <ui:ToggleButton Grid.Row="3"
+                        Grid.Column="2"
+                        Text="{Binding Medium}"
+                        IsToggled="{Binding LargestIs50, Mode=TwoWay}"
+                        Style="{StaticResource ToggleButtonLarge}"/>
+
+                <ui:ToggleButton Grid.Row="3"
+                        Grid.Column="3"
+                        Text="{Binding Big}"
+                        IsToggled="{Binding LargestIs100, Mode=TwoWay}"         
+                        Style="{StaticResource ToggleButtonLarge}"/>
+
+                <Label Grid.Row="4"
+                       Grid.Column="0"
+                       Grid.ColumnSpan="4"
+                       Text="Numero di domande"
+                       Style="{StaticResource LargeLabel}"/>
+
+                <ui:ToggleButton Grid.Row="5"
+                        Grid.Column="0"
+                        Text="10"
+                        IsToggled="{Binding Are10Questions, Mode=TwoWay}"
+                        Style="{StaticResource ToggleButtonLarge}"/>
+
+                <ui:ToggleButton Grid.Row="5"
+                        Grid.Column="1"
+                        Text="25"
+                        IsToggled="{Binding Are25Questions, Mode=TwoWay}"
+                        Style="{StaticResource ToggleButtonLarge}"/>
+
+                <ui:ToggleButton Grid.Row="5"
+                        Grid.Column="2"
+                        Text="50"
+                        IsToggled="{Binding Are50Questions, Mode=TwoWay}"
+                        Style="{StaticResource ToggleButtonLarge}"/>
+
+                <ui:ToggleButton Grid.Row="5"
+                        Grid.Column="3"
+                        Text="100"
+                        IsToggled="{Binding Are100Questions, Mode=TwoWay}"
+                        Style="{StaticResource ToggleButtonLarge}"/>
+
+                <Button Grid.Row="6" Grid.Column="0"
+                        Grid.ColumnSpan="4"
+                        Text="Gioca!"
+                        Command="{Binding PlayCommand}"
+                        Style="{StaticResource ButtonTitleOrange}"/>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

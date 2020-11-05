@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="LearningNumbers.App"
+             xmlns:ui="clr-namespace:LearningNumbers.CustomElements">
+
+    <Application.Resources>
+        <ResourceDictionary>
+            <!--Global Styles-->
+            <Color x:Key="NavigationPrimary">#149BE8</Color>
+            <Style TargetType="NavigationPage">
+                <Setter Property="BarBackgroundColor" Value="{StaticResource NavigationPrimary}" />
+                <Setter Property="BarTextColor" Value="#fff" />
+            </Style>
+            <Style x:Key="LargeLabel" TargetType="Label">
+                <Setter Property="FontFamily" Value="LuckiestGuy" />
+                <Setter Property="FontSize" Value="Large"/>
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+                <Setter Property="VerticalOptions" Value="FillAndExpand"/>
+                <Setter Property="TextColor" Value="#fff"/>
+            </Style>
+
+            <Style x:Key="CalculusLabel" TargetType="Label">
+                <Setter Property="FontFamily" Value="LuckiestGuy" />
+                <Setter Property="FontSize" Value="50"/>
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+                <Setter Property="TextColor" Value="#fff"/>
+            </Style>
+
+            <Style x:Key="CalculusButton" TargetType="Button">
+                <Setter Property="FontFamily" Value="LuckiestGuy" />
+                <Setter Property="FontSize" Value="35"/>
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+                <Setter Property="TextColor" Value="#fff"/>
+                <Setter Property="BackgroundColor" Value="#73BCE6"/>
+               
+            </Style>
+            <Style x:Key="Entry" TargetType="Entry">
+                <Setter Property="FontFamily" Value="LuckiestGuy" />
+                <Setter Property="FontSize" Value="Header"/>
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+                <Setter Property="TextColor" Value="#fff"/>
+            </Style>
+
+            <Style x:Key="ButtonLarge" TargetType="Button">
+                <Setter Property="FontFamily" Value="LuckiestGuy" />
+                <Setter Property="FontSize" Value="Large"/>
+                <Setter Property="BackgroundColor" Value="#73BCE6"/>
+            </Style>
+            <Style x:Key="ButtonTitle" TargetType="Button">
+                <Setter Property="FontFamily" Value="LuckiestGuy" />
+                <Setter Property="FontSize" Value="Header"/>
+                <Setter Property="BackgroundColor" Value="#73BCE6"/>
+            </Style>
+            <Style x:Key="ButtonTitleOrange" TargetType="Button">
+                <Setter Property="FontFamily" Value="LuckiestGuy" />
+                <Setter Property="FontSize" Value="Header"/>
+                <Setter Property="BackgroundColor" Value="#FFA500"/>
+            </Style>
+            
+
+            <Style x:Key="ToggleButtonHeader" TargetType="ui:ToggleButton">
+                <Setter Property="FontFamily" Value="LuckiestGuy" />
+                <Setter Property="FontSize" Value="Header"/>
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup Name="ToggleStates">
+                            <VisualState Name="ToggledOff">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="#73BCE6"/>
+                                    <Setter Property="TextColor" Value="#000"/>
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState Name="ToggledOn">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="#149BE8"/>
+                                    <Setter Property="TextColor" Value="#FFA500"/>
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+
+            <Style x:Key="ToggleButtonLarge" TargetType="ui:ToggleButton">
+                <Setter Property="FontFamily" Value="LuckiestGuy"  />
+                <Setter Property="FontSize" Value="Large"/>
+                <!-- ON UWP mouse hover is not good <Setter Property="ButtonBackgroundPointerOver" Value="#149BE8"/> -->
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup Name="ToggleStates">
+                            <VisualState Name="ToggledOff">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="#73BCE6"/>
+                                    <Setter Property="TextColor" Value="#000"/>
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState Name="ToggledOn">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="#149BE8"/>
+                                    <Setter Property="TextColor" Value="#FFA500"/>
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+    
+</Application>
