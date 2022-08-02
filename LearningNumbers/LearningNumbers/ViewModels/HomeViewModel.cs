@@ -1,17 +1,12 @@
-﻿using LearningNumbers.Services;
-using LearningNumbers.Views;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Windows.Input;
+using LearningNumbers.Services;
 using Xamarin.Forms;
 
 namespace LearningNumbers.ViewModels
 {
     public class HomeViewModel : BaseViewModel
     {
-        #region operators
         private bool canSum = true;
         public bool CanSum
         {
@@ -66,9 +61,7 @@ namespace LearningNumbers.ViewModels
                 SetProperty(ref canDivide, value);
             }
         }
-        #endregion
 
-        #region Largest number
 
         private int largestNumber = 10;
 
@@ -194,11 +187,7 @@ namespace LearningNumbers.ViewModels
             }
 
         }
-
-        #endregion
-
-        #region Number of questions
-
+        
         private int numberOfQuestions = 10;
 
         private bool are10Questions = true;
@@ -278,20 +267,22 @@ namespace LearningNumbers.ViewModels
                 SetProperty(ref are100Questions, value);
             }
         }
-        #endregion
-
 
         public ICommand PlayCommand { get; }
 
         public HomeViewModel(INavigationService navigation) : base(navigation)
         {
-
             PlayCommand = new Command( async () => await ExecutePlayCommand());
         }
 
         private Task ExecutePlayCommand()
         {
-            return navigationService.GoToQuestions(canSum, canSubstract, CanMultipilcate, CanDivide, largestNumber, numberOfQuestions); 
+            return NavigationService.GoToQuestions(canSum, canSubstract, CanMultipilcate, CanDivide, largestNumber, numberOfQuestions); 
+        }
+
+        public override void Configure(object configuration)
+        {
+            
         }
     }
 }

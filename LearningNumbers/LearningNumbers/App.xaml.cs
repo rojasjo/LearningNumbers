@@ -1,16 +1,12 @@
-﻿using System;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
+﻿using LearningNumbers.Bootstrap;
 using LearningNumbers.Services;
 using LearningNumbers.Views;
-using System.Runtime.CompilerServices;
-using LearningNumbers.Bootstrap;
+using Xamarin.Forms;
 
 namespace LearningNumbers
 {
-    public partial class App : Application
+    public partial class App : Application, IApplication
     {
-
         public App()
         {
             InitializeComponent();
@@ -28,6 +24,11 @@ namespace LearningNumbers
 
         protected override void OnResume()
         {
+        }
+
+        public INavigation GetNavigation()
+        {
+            return MainPage.Navigation;
         }
     }
 }

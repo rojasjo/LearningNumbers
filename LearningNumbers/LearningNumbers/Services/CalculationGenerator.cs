@@ -1,7 +1,6 @@
-﻿using LearningNumbers.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using LearningNumbers.Models;
 
 namespace LearningNumbers.Services
 {
@@ -36,8 +35,7 @@ namespace LearningNumbers.Services
             else
                 maxNumber = maximunNumber;
         }
-
-
+        
         public Calculation Generate()
         {
             int randomOperator = random.Next(4);
@@ -59,10 +57,7 @@ namespace LearningNumbers.Services
             int a = random.Next(maxNumber + 1);
             int b = random.Next(maxNumber + 1);
 
-
-
-
-
+            
             if (calculation.Operator == Operator.Subtraction)
             {
                 bool aIsValid = a > 0;
@@ -99,7 +94,6 @@ namespace LearningNumbers.Services
             calculation.Second = b;
             return calculation;
         }
-
     }
 }
 

@@ -1,10 +1,7 @@
-﻿using LearningNumbers.Models;
-using LearningNumbers.Services;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Windows.Input;
+using LearningNumbers.Models;
+using LearningNumbers.Services;
 using Xamarin.Forms;
 
 namespace LearningNumbers.ViewModels
@@ -21,8 +18,7 @@ namespace LearningNumbers.ViewModels
         }
 
         private int maxAttempts = 3;
-
-
+        
         private int currentAttempts;
 
         public int CurrentAttempts
@@ -184,6 +180,11 @@ namespace LearningNumbers.ViewModels
             {
                 ShowEnd = !CanCheck();
             }
+        }
+
+        public override void Configure(object configuration)
+        {
+            
         }
     }
 }

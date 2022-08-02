@@ -1,25 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using LearningNumbers.Services;
+using LearningNumbers.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace LearningNumbers.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class QuestionView : ContentPage
+    public partial class QuestionView : ContentPage, IView
     {
         public QuestionView()
         {
             InitializeComponent();
         }
 
-        private void Button_Clicked(object sender, EventArgs e)
+        public BaseViewModel GetViewModel()
         {
-
+            return BindingContext as QuestionViewModel;
         }
     }
 }

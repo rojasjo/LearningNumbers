@@ -1,8 +1,4 @@
-﻿using LearningNumbers.ViewModels;
-using LearningNumbers.Views;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -10,22 +6,34 @@ namespace LearningNumbers.Services
 {
     public class NavigationService : INavigationService
     {
-     
-        public Task GoBack()
+        private readonly IAppContainer appContainer;
+        private readonly IViewFactory _viewFactory;
+
+        public NavigationService(IAppContainer appContainer, IViewFactory viewFactory)
         {
-            return Application.Current.MainPage.Navigation.PopAsync();
+            this.appContainer = appContainer;
+            _viewFactory = viewFactory;
         }
 
-        public Task GoToQuestions(bool canSum, bool canSubstract, bool CanMultiplicate, bool CanDivide, int largestNumber, int numberOfQuestions)
+        public Task GoBack()
         {
-            var view = new QuestionView();
-            QuestionViewModel vm = view.BindingContext as QuestionViewModel;
+            return appContainer.GetApp().GetNavigation().PopAsync();
+        }
+
+        public Task GoToQuestions(bool canSum, bool canSubstract, bool CanMultiplicate, bool CanDivide,
+            int largestNumber, int numberOfQuestions)
+        {
+            var view = _viewFactory.CreateQuestionView();
+            var vm = view.GetViewModel();
 
             if (vm is null)
+            {
                 throw new InvalidOperationException();
+            }
 
-            vm.Start(canSum, canSubstract, CanMultiplicate, CanDivide, largestNumber, numberOfQuestions);
-            return Application.Current.MainPage.Navigation.PushAsync(view, true);
+            vm.Configure(new {canSum, canSubstract, CanMultiplicate, CanDivide, largestNumber, numberOfQuestions});
+
+            return appContainer.GetApp().GetNavigation().PushAsync(view as Page, true);
         }
     }
 }

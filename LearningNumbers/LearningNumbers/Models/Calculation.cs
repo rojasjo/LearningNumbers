@@ -1,31 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace LearningNumbers.Models
 {
-    public enum Operator
-    {
-        Sum,
-        Subtraction,
-        Division,
-        Multiplication
-    }
     public class Calculation
     {
-
-        public Calculation(Operator operatore)
-        {
-            Operator = operatore;
-        }
-
         public int First { get; set; }
-
+        
         private int second;
-
+        
         public int Second
         {
-            get { return second; }
+            get => second;
 
             set
             {
@@ -37,11 +22,15 @@ namespace LearningNumbers.Models
 
         public Operator Operator { get; private set; }
 
-        public String Symbol { get { return GetSimbolo(); } }
+        public String Symbol => GetSymbol();
         public int GivenResult { get; set; }
 
         public int Attempts { get; private set; }
 
+        public Calculation(Operator operatore)
+        {
+            Operator = operatore;
+        }
 
         public int Calculate()
         {
@@ -62,7 +51,7 @@ namespace LearningNumbers.Models
             }
         }
 
-        private string GetSimbolo()
+        private string GetSymbol()
         {
             switch (Operator)
             {

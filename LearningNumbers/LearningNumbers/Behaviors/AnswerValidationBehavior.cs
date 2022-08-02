@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows.Input;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -9,15 +7,19 @@ namespace LearningNumbers.Behaviors
 {
     public class AnswerValidationBehavior : Behavior<Label>
     {
+        private bool isAnimating;
+
+        public Label AssociatedObject { get; private set; }
+
         public static readonly BindableProperty ShakeProperty =
-       BindableProperty.Create(nameof(Shake), typeof(ICommand), typeof(View), null, defaultBindingMode: BindingMode.TwoWay);
+            BindableProperty.Create(nameof(Shake), typeof(ICommand), typeof(View), null,
+                defaultBindingMode: BindingMode.TwoWay);
 
         public ICommand Shake
         {
-            get { return (ICommand)GetValue(ShakeProperty); }
-            set { SetValue(ShakeProperty, value); }
+            get => (ICommand) GetValue(ShakeProperty);
+            set => SetValue(ShakeProperty, value);
         }
-        public Label AssociatedObject { get; private set; }
 
         protected override void OnAttachedTo(Label bindable)
         {
@@ -33,25 +35,22 @@ namespace LearningNumbers.Behaviors
             bindable.BindingContextChanged -= OnBindingContextChanged;
             AssociatedObject = null;
 
-
             base.OnDetachingFrom(bindable);
         }
 
-        bool _isAnimating = false;
-
-        void ShakeIt()
+        private void ShakeIt()
         {
-            if (_isAnimating)
+            if (isAnimating)
                 return;
 
-            _isAnimating = true;
+            isAnimating = true;
 
             Device.BeginInvokeOnMainThread(async () =>
             {
                 try
                 {
                     var color = AssociatedObject.TextColor;
-                    AssociatedObject.TextColor = (Color)ColorConverters.FromHex("#dc3545");
+                    AssociatedObject.TextColor = ColorConverters.FromHex("#dc3545");
                     await AssociatedObject.TranslateTo(-15, 0, 50);
                     await AssociatedObject.TranslateTo(15, 0, 50);
                     await AssociatedObject.TranslateTo(-10, 0, 50);
@@ -63,12 +62,12 @@ namespace LearningNumbers.Behaviors
                 }
                 finally
                 {
-                    _isAnimating = false;
+                    isAnimating = false;
                 }
             });
         }
 
-        void OnBindingContextChanged(object sender, EventArgs e)
+        private void OnBindingContextChanged(object sender, EventArgs e)
         {
             OnBindingContextChanged();
         }
@@ -80,10 +79,7 @@ namespace LearningNumbers.Behaviors
 
             if (BindingContext != null)
             {
-                Shake = new Command(() =>
-                {
-                    ShakeIt();
-                });
+                Shake = new Command(ShakeIt);
             }
         }
     }

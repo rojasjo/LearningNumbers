@@ -1,16 +1,14 @@
-﻿using Autofac;
+﻿using System;
+using Autofac;
 using LearningNumbers.Services;
 using LearningNumbers.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Xamarin.Forms;
 
 namespace LearningNumbers.Bootstrap
 {
-    public class AppContainer
+    public class AppContainer : IAppContainer
     {
         private static IContainer _container;
-
 
         public static void RegisterDependencies()
         {
@@ -20,33 +18,28 @@ namespace LearningNumbers.Bootstrap
 
             builder.RegisterType<CalculationGenerator>()
                 .As<ICalculationGenerator>();
-
+            
             builder.RegisterType<NavigationService>()
-               .As<INavigationService>();
+                .As<INavigationService>();
 
-           
-
+            builder.RegisterType<AppContainer>().As<IAppContainer>();
+            
             _container = builder.Build();
         }
 
-        /// <summary>
-        /// This method will resolve dependency by typenames
-        /// </summary>
-        /// <param name="typename"></param>
-        /// <returns></returns>
         public static object Resolve(Type typename)
         {
             return _container.Resolve(typename);
         }
 
-        /// <summary>
-        /// This method will resolve the dependency using generics
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
-        public static T Resolve<T>()
+        private static IApplication GetCurrentApplication()
         {
-            return _container.Resolve<T>();
+            return Application.Current as IApplication;
+        }
+
+        public IApplication GetApp()
+        {
+            return GetCurrentApplication();
         }
     }
 }

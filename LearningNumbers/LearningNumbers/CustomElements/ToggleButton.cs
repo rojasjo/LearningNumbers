@@ -1,44 +1,42 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Xamarin.Forms;
 
 namespace LearningNumbers.CustomElements
 {
-    class ToggleButton : Button
+    public class ToggleButton : Button
     {
-        public event EventHandler<ToggledEventArgs> Toggled;
+        public bool IsToggled
+        {
+            set => SetValue(IsToggledProperty, value);
+            get => (bool) GetValue(IsToggledProperty);
+        }
 
-        public static BindableProperty IsToggledProperty =
-            BindableProperty.Create("IsToggled", typeof(bool), typeof(ToggleButton), false,
-                                    propertyChanged: OnIsToggledChanged);
+        public static readonly BindableProperty IsToggledProperty =
+            BindableProperty.Create(nameof(IsToggled), typeof(bool), typeof(ToggleButton), false,
+                propertyChanged: OnIsToggledChanged);
 
         public ToggleButton()
         {
-            Clicked += (sender, args) => IsToggled ^= true;
+            Clicked += UpdateIsToggled;
         }
 
-        public bool IsToggled
+        private void UpdateIsToggled(object sender, EventArgs e)
         {
-            set { SetValue(IsToggledProperty, value); }
-            get { return (bool)GetValue(IsToggledProperty); }
+            IsToggled ^= true;
         }
 
         protected override void OnParentSet()
         {
             base.OnParentSet();
+            
             VisualStateManager.GoToState(this, "ToggledOff");
         }
 
         static void OnIsToggledChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            ToggleButton toggleButton = (ToggleButton)bindable;
-            bool isToggled = (bool)newValue;
+            var toggleButton = (ToggleButton) bindable;
+            var isToggled = (bool) newValue;
 
-            // Fire event
-            toggleButton.Toggled?.Invoke(toggleButton, new ToggledEventArgs(isToggled));
-
-            // Set the visual state
             VisualStateManager.GoToState(toggleButton, isToggled ? "ToggledOn" : "ToggledOff");
         }
     }
