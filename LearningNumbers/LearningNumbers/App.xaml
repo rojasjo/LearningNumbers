@@ -33,7 +33,8 @@
             <Style x:Key="CalculusButton" TargetType="Button">
                 <Setter Property="FontFamily" Value="LuckiestGuy" />
                 <Setter Property="FontSize" Value="35"/>
-                <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="VerticalOptions" Value="FillAndExpand" />
                 <Setter Property="TextColor" Value="#fff"/>
                 <Setter Property="BackgroundColor" Value="#73BCE6"/>
                

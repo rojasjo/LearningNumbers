@@ -23,8 +23,7 @@ namespace LearningNumbers.Models
         public Operator Operator { get; private set; }
 
         public String Symbol => GetSymbol();
-        public int GivenResult { get; set; }
-
+        
         public int Attempts { get; private set; }
 
         public Calculation(Operator operatore)

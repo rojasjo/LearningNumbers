@@ -15,13 +15,7 @@ namespace LearningNumbers.Services
             _viewFactory = viewFactory;
         }
 
-        public Task GoBack()
-        {
-            return appContainer.GetApp().GetNavigation().PopAsync();
-        }
-
-        public Task GoToQuestions(bool canSum, bool canSubstract, bool CanMultiplicate, bool CanDivide,
-            int largestNumber, int numberOfQuestions)
+        public Task GoToQuestions(QuestionViewModelConfiguration viewModelConfiguration)
         {
             var view = _viewFactory.CreateQuestionView();
             var vm = view.GetViewModel();
@@ -31,9 +25,14 @@ namespace LearningNumbers.Services
                 throw new InvalidOperationException();
             }
 
-            vm.Configure(new {canSum, canSubstract, CanMultiplicate, CanDivide, largestNumber, numberOfQuestions});
+            vm.Configure(viewModelConfiguration);
 
             return appContainer.GetApp().GetNavigation().PushAsync(view as Page, true);
+        }
+
+        public Task GoBack()
+        {
+            return appContainer.GetApp().GetNavigation().PopAsync();
         }
     }
 }

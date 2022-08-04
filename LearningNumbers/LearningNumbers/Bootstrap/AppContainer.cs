@@ -23,6 +23,7 @@ namespace LearningNumbers.Bootstrap
                 .As<INavigationService>();
 
             builder.RegisterType<AppContainer>().As<IAppContainer>();
+            builder.RegisterType<ViewFactory>().As<IViewFactory>();
             
             _container = builder.Build();
         }

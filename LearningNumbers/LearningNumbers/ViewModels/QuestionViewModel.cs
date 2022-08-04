@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using System.Windows.Input;
+using LearningNumbers.Exceptions;
 using LearningNumbers.Models;
 using LearningNumbers.Services;
 using Xamarin.Forms;
@@ -8,7 +9,6 @@ namespace LearningNumbers.ViewModels
 {
     public class QuestionViewModel : BaseViewModel
     {
-
         private int numberOfQuestions;
 
         public int NumberOfQuestions
@@ -18,7 +18,7 @@ namespace LearningNumbers.ViewModels
         }
 
         private int maxAttempts = 3;
-        
+
         private int currentAttempts;
 
         public int CurrentAttempts
@@ -55,6 +55,7 @@ namespace LearningNumbers.ViewModels
         }
 
         private bool showEnd;
+
         public bool ShowEnd
         {
             get { return showEnd; }
@@ -78,14 +79,15 @@ namespace LearningNumbers.ViewModels
         public ICommand AttemptsAnimationCommand { get; set; }
         private ICalculationGenerator calculationGenerator;
 
-        public QuestionViewModel(INavigationService navigation, ICalculationGenerator calculationGenerator) : base(navigation)
+        public QuestionViewModel(INavigationService navigation, ICalculationGenerator calculationGenerator) :
+            base(navigation)
         {
             NumberOfQuestions = numberOfQuestions;
             this.calculationGenerator = calculationGenerator;
-            CheckCommand = new Command(() => ExecuteCheckCommand());
-            BackCommand = new Command(async () => await ExecuteBackCommand());
-            WriteNumberCommand = new Command<string>(x => ExecuteWriteNumberCommand(x));
-            RemoveLastCharInAnswer = new Command(() => ExecuteRemoveLastCharInAnswer());
+            CheckCommand = new Command(ExecuteCheckCommand);
+            BackCommand = new Command(async () => await  ExecuteBackCommand());
+            WriteNumberCommand = new Command<string>(ExecuteWriteNumberCommand);
+            RemoveLastCharInAnswer = new Command(ExecuteRemoveLastCharInAnswer);
             CurrentAttempts = maxAttempts;
         }
 
@@ -115,19 +117,16 @@ namespace LearningNumbers.ViewModels
             {
                 Answer = newAnswer;
             }
-
-
         }
 
-        public void Start(bool canSum, bool canSubstract,
-                          bool canMultipilcate, bool canDivide,
-                          int largestNumber, int numberOfQuestions)
+        public void Start(QuestionViewModelConfiguration configuration)
         {
-            calculationGenerator.Configure(largestNumber, canSum, canSubstract, canMultipilcate, canDivide);
-            NumberOfQuestions = numberOfQuestions;
+            calculationGenerator.Configure(configuration.CalculationConfiguration);
+            
+            NumberOfQuestions = configuration.QuestionsNumber;
             CurrentCalculus = calculationGenerator.Generate();
-
         }
+
         private Task ExecuteBackCommand()
         {
             return Application.Current.MainPage.Navigation.PopModalAsync();
@@ -163,7 +162,6 @@ namespace LearningNumbers.ViewModels
                     }
                 }
             }
-
         }
 
         private void NextQuestion()
@@ -184,7 +182,12 @@ namespace LearningNumbers.ViewModels
 
         public override void Configure(object configuration)
         {
-            
+            if (!(configuration is QuestionViewModelConfiguration calculationConfiguration))
+            {
+                throw new InvalidConfigurationException();
+            }
+
+            Start(calculationConfiguration);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.ComponentModel;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using LearningNumbers.Services;
 using Xamarin.Forms;
@@ -277,7 +278,20 @@ namespace LearningNumbers.ViewModels
 
         private Task ExecutePlayCommand()
         {
-            return NavigationService.GoToQuestions(canSum, canSubstract, CanMultipilcate, CanDivide, largestNumber, numberOfQuestions); 
+            var configuration = new QuestionViewModelConfiguration()
+            {
+                QuestionsNumber = numberOfQuestions,
+                CalculationConfiguration = new CalculationConfiguration
+                {
+                    CanDivide = canDivide,
+                    CanSum = canSum,
+                    CanSubtract = canSubstract,
+                    CanMultiply = canMultipilcate,
+                    MaximumNumber = largestNumber
+                }
+            };
+            
+            return NavigationService.GoToQuestions(configuration); 
         }
 
         public override void Configure(object configuration)

@@ -10,7 +10,8 @@
              xmlns:utility="clr-namespace:LearningNumbers.Utilities;assembly=LearningNumbers"
              utility:ViewModelLocator.AutoWireViewModel="True"
              BackgroundColor="#0f0f0f"
-             Title="Esercita i caloli">
+             Title="Esercita i caloli"
+             Padding="0, 20">
     <ContentPage.Content>
         <StackLayout Margin="10">
             <Grid VerticalOptions="FillAndExpand">
@@ -43,7 +44,9 @@
                     Text="+"
                     IsToggled="{Binding CanSum, Mode=TwoWay}"
                     Style="{StaticResource ToggleButtonHeader}"
-                    FontSize="100"/>
+                    FontSize="100"
+                    
+                    />
                 
                 <ui:ToggleButton Grid.Row="1"
                                  Grid.Column="1"
@@ -70,7 +73,8 @@
                        Grid.Column="0"
                        Grid.ColumnSpan="4"
                        Text="Numero più grande"
-                       Style="{StaticResource LargeLabel}" />
+                       Style="{StaticResource LargeLabel}"
+                       VerticalTextAlignment="Center"/>
 
                 <ui:ToggleButton Grid.Row="3"
                                  Grid.Column="0"
@@ -100,7 +104,8 @@
                        Grid.Column="0"
                        Grid.ColumnSpan="4"
                        Text="Numero di domande"
-                       Style="{StaticResource LargeLabel}" />
+                       Style="{StaticResource LargeLabel}"
+                       VerticalTextAlignment="Center"/>
 
                 <ui:ToggleButton Grid.Row="5"
                                  Grid.Column="0"

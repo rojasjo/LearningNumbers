@@ -10,52 +10,62 @@ namespace LearningNumbers.Tests
     [TestFixture]
     public class NavigationTests
     {
-        private NavigationService testable;
+        private NavigationService _testable;
 
-        private Mock<IAppContainer> appContainerMock;
-        private Mock<IApplication> applicationMock;
-        private Mock<INavigation> navigationMock;
-        private Mock<Page> questionPageMock;
-        private Mock<IView> questionViewMock;
-        private Mock<IViewFactory> viewFactoryMock;
-        
+        private Mock<IAppContainer> _appContainerMock;
+        private Mock<IApplication> _applicationMock;
+        private Mock<INavigation> _navigationMock;
+        private Mock<Page> _questionPageMock;
+        private Mock<IView> _questionViewMock;
+        private Mock<IViewFactory> _viewFactoryMock;
+
         [SetUp]
         public void Setup()
         {
             SetupApplication();
             SetupQuestionView();
 
-            testable = new NavigationService(appContainerMock.Object, viewFactoryMock.Object);
+            _testable = new NavigationService(_appContainerMock.Object, _viewFactoryMock.Object);
         }
 
         private void SetupQuestionView()
         {
-            viewFactoryMock = new Mock<IViewFactory>();
-            questionPageMock = new Mock<Page>();
-            questionViewMock = questionPageMock.As<IView>();
+            _viewFactoryMock = new Mock<IViewFactory>();
+            _questionPageMock = new Mock<Page>();
+            _questionViewMock = _questionPageMock.As<IView>();
 
-            questionViewMock.Setup(p => p.GetViewModel())
+            _questionViewMock.Setup(p => p.GetViewModel())
                 .Returns(new QuestionViewModel(new Mock<INavigationService>().Object, new CalculationGenerator()));
 
-            viewFactoryMock.Setup(p => p.CreateQuestionView()).Returns(questionViewMock.Object);
+            _viewFactoryMock.Setup(p => p.CreateQuestionView()).Returns(_questionViewMock.Object);
         }
 
         private void SetupApplication()
         {
-            applicationMock = new Mock<IApplication>();
+            _applicationMock = new Mock<IApplication>();
             AppContainer.RegisterDependencies();
-            appContainerMock = new Mock<IAppContainer>();
-            navigationMock = new Mock<INavigation>();
-            applicationMock.Setup(p => p.GetNavigation()).Returns(navigationMock.Object);
-            appContainerMock.Setup(p => p.GetApp()).Returns(applicationMock.Object);
+            _appContainerMock = new Mock<IAppContainer>();
+            _navigationMock = new Mock<INavigation>();
+            _applicationMock.Setup(p => p.GetNavigation()).Returns(_navigationMock.Object);
+            _appContainerMock.Setup(p => p.GetApp()).Returns(_applicationMock.Object);
         }
 
         [Test]
         public void GoToQuestion_Always_NavigateToQuestionPage()
         {
-            testable.GoToQuestions(true, false, false, false, 10, 10);
+            _testable.GoToQuestions(new QuestionViewModelConfiguration
+                {CalculationConfiguration = new CalculationConfiguration()});
 
-            navigationMock.Verify(p => p.PushAsync(questionPageMock.Object, It.IsAny<bool>()), Times.Once);
+            _navigationMock.Verify(p => p.PushAsync(_questionPageMock.Object, It.IsAny<bool>()), Times.Once);
         }
-    }
+
+        [Test]
+        public void GoBack_Always_PopAsyncIsInvoked()
+        {
+            _testable.GoBack();
+            
+            _navigationMock.Verify(p => p.PopAsync(), Times.Once);
+        }
+    
+}
 }

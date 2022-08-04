@@ -4,8 +4,7 @@ namespace LearningNumbers.Services
 {
     public interface INavigationService
     {
-        Task GoToQuestions(bool canSum, bool canSubstract, bool canMultiplicate,
-            bool canDivide, int largestNumber, int numberOfQuestiosns);
+        Task GoToQuestions(QuestionViewModelConfiguration viewModelConfiguration);
 
         Task GoBack();
     }
