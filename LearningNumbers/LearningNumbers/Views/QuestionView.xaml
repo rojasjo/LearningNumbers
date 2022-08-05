@@ -140,7 +140,7 @@
                     <Button Grid.Row="3" Grid.Column="2"
                             Text="✔" Style="{StaticResource CalculusButton}"
                             BackgroundColor="#4cc29f"
-                            Command="{Binding CheckCommand}" />
+                            Command="{Binding CheckAnswerCommand}" />
                 </Grid>
 
                 <StackLayout Grid.Row="2"

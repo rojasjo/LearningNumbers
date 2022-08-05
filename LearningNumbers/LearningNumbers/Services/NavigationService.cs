@@ -6,12 +6,12 @@ namespace LearningNumbers.Services
 {
     public class NavigationService : INavigationService
     {
-        private readonly IAppContainer appContainer;
+        private readonly IAppContainer _appContainer;
         private readonly IViewFactory _viewFactory;
 
         public NavigationService(IAppContainer appContainer, IViewFactory viewFactory)
         {
-            this.appContainer = appContainer;
+            _appContainer = appContainer;
             _viewFactory = viewFactory;
         }
 
@@ -27,12 +27,12 @@ namespace LearningNumbers.Services
 
             vm.Configure(viewModelConfiguration);
 
-            return appContainer.GetApp().GetNavigation().PushAsync(view as Page, true);
+            return _appContainer.GetApp().GetNavigation().PushAsync(view as Page, true);
         }
 
         public Task GoBack()
         {
-            return appContainer.GetApp().GetNavigation().PopAsync();
+            return _appContainer.GetApp().GetNavigation().PopAsync();
         }
     }
 }

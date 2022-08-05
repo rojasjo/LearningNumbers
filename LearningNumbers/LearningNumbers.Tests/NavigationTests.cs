@@ -1,5 +1,8 @@
+using System.Collections.Generic;
 using LearningNumbers.Bootstrap;
+using LearningNumbers.Models;
 using LearningNumbers.Services;
+using LearningNumbers.Utilities;
 using LearningNumbers.ViewModels;
 using Moq;
 using NUnit.Framework;
@@ -35,7 +38,7 @@ namespace LearningNumbers.Tests
             _questionViewMock = _questionPageMock.As<IView>();
 
             _questionViewMock.Setup(p => p.GetViewModel())
-                .Returns(new QuestionViewModel(new Mock<INavigationService>().Object, new CalculationGenerator()));
+                .Returns(new QuestionViewModel(new Mock<INavigationService>().Object, new CalculationGenerator(), new DigitService()));
 
             _viewFactoryMock.Setup(p => p.CreateQuestionView()).Returns(_questionViewMock.Object);
         }
@@ -54,7 +57,7 @@ namespace LearningNumbers.Tests
         public void GoToQuestion_Always_NavigateToQuestionPage()
         {
             _testable.GoToQuestions(new QuestionViewModelConfiguration
-                {CalculationConfiguration = new CalculationConfiguration()});
+                {CalculationConfiguration = new CalculationConfiguration(new List<Operator> {Operator.Division})});
 
             _navigationMock.Verify(p => p.PushAsync(_questionPageMock.Object, It.IsAny<bool>()), Times.Once);
         }
@@ -63,9 +66,8 @@ namespace LearningNumbers.Tests
         public void GoBack_Always_PopAsyncIsInvoked()
         {
             _testable.GoBack();
-            
+
             _navigationMock.Verify(p => p.PopAsync(), Times.Once);
         }
-    
-}
+    }
 }

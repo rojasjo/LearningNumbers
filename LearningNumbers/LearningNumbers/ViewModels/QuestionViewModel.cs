@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using LearningNumbers.Exceptions;
 using LearningNumbers.Models;
 using LearningNumbers.Services;
@@ -9,175 +8,90 @@ namespace LearningNumbers.ViewModels
 {
     public class QuestionViewModel : BaseViewModel
     {
-        private int numberOfQuestions;
+        private readonly ICalculationGenerator _calculationGenerator;
+        private readonly IDigitService _digitService;
+        
+        private const int MaxAttempts = 3;
+
+        private int _numberOfQuestions;
 
         public int NumberOfQuestions
         {
-            get { return numberOfQuestions; }
-            set { SetProperty(ref numberOfQuestions, value); }
+            get => _numberOfQuestions;
+            set => SetProperty(ref _numberOfQuestions, value);
         }
 
-        private int maxAttempts = 3;
-
-        private int currentAttempts;
+        private int _currentAttempts;
 
         public int CurrentAttempts
         {
-            get { return currentAttempts; }
-            set { SetProperty(ref currentAttempts, value); }
+            get => _currentAttempts;
+            set => SetProperty(ref _currentAttempts, value);
         }
 
-
-        private int? answer;
+        private int? _answer;
 
         public int? Answer
 
         {
-            get { return answer; }
-            set { SetProperty(ref answer, value); }
+            get => _answer;
+            set => SetProperty(ref _answer, value);
         }
 
-        private int correctAnswers = 0;
+        private int _correctAnswers;
 
         public int CorrectAnswers
         {
-            get { return correctAnswers; }
-            set { SetProperty(ref correctAnswers, value); }
+            get => _correctAnswers;
+            set => SetProperty(ref _correctAnswers, value);
         }
 
-
-        private int wrongAnswers;
+        private int _wrongAnswers;
 
         public int WrongAnswers
         {
-            get { return wrongAnswers; }
-            set { SetProperty(ref wrongAnswers, value); }
+            get => _wrongAnswers;
+            set => SetProperty(ref _wrongAnswers, value);
         }
 
-        private bool showEnd;
+        private bool _showEnd;
 
         public bool ShowEnd
         {
-            get { return showEnd; }
-            set { SetProperty(ref showEnd, value); }
+            get => _showEnd;
+            set => SetProperty(ref _showEnd, value);
         }
 
-        private Calculation currentCalculus;
-
+        private Calculation _currentCalculus;
+        
         public Calculation CurrentCalculus
         {
-            get { return currentCalculus; }
-            set { SetProperty(ref currentCalculus, value); }
+            get => _currentCalculus;
+            set => SetProperty(ref _currentCalculus, value);
         }
 
-        public ICommand CheckCommand { get; }
-        public ICommand BackCommand { get; }
+        public ICommand CheckAnswerCommand { get; }
+
         public ICommand WriteNumberCommand { get; }
+
         public ICommand RemoveLastCharInAnswer { get; }
 
         public ICommand ValidateCommand { get; set; }
-        public ICommand AttemptsAnimationCommand { get; set; }
-        private ICalculationGenerator calculationGenerator;
 
-        public QuestionViewModel(INavigationService navigation, ICalculationGenerator calculationGenerator) :
+        public ICommand AttemptsAnimationCommand { get; set; }
+
+        public QuestionViewModel(INavigationService navigation, ICalculationGenerator calculationGenerator, IDigitService digitService) :
             base(navigation)
         {
-            NumberOfQuestions = numberOfQuestions;
-            this.calculationGenerator = calculationGenerator;
-            CheckCommand = new Command(ExecuteCheckCommand);
-            BackCommand = new Command(async () => await  ExecuteBackCommand());
+            _calculationGenerator = calculationGenerator;
+            _digitService = digitService;
+            
+            NumberOfQuestions = _numberOfQuestions;
+            CurrentAttempts = MaxAttempts;
+
+            CheckAnswerCommand = new Command(ExecuteCheckCommand);
             WriteNumberCommand = new Command<string>(ExecuteWriteNumberCommand);
             RemoveLastCharInAnswer = new Command(ExecuteRemoveLastCharInAnswer);
-            CurrentAttempts = maxAttempts;
-        }
-
-        private void ExecuteRemoveLastCharInAnswer()
-        {
-            if (Answer != null)
-            {
-                string answerString = Answer.ToString();
-                int lastIndex = answerString.Length - 1;
-                answerString = answerString.Remove(lastIndex);
-                if (int.TryParse(answerString, out int newAnswer))
-                {
-                    Answer = newAnswer;
-                }
-                else
-                {
-                    Answer = null;
-                }
-            }
-        }
-
-        private void ExecuteWriteNumberCommand(string x)
-        {
-            string currentValue = Answer.ToString() + x;
-
-            if (int.TryParse(currentValue, out int newAnswer))
-            {
-                Answer = newAnswer;
-            }
-        }
-
-        public void Start(QuestionViewModelConfiguration configuration)
-        {
-            calculationGenerator.Configure(configuration.CalculationConfiguration);
-            
-            NumberOfQuestions = configuration.QuestionsNumber;
-            CurrentCalculus = calculationGenerator.Generate();
-        }
-
-        private Task ExecuteBackCommand()
-        {
-            return Application.Current.MainPage.Navigation.PopModalAsync();
-        }
-
-        private bool CanCheck()
-        {
-            return NumberOfQuestions > 0;
-        }
-
-        private void ExecuteCheckCommand()
-        {
-            if (CanCheck())
-            {
-                if (Answer == CurrentCalculus.Calculate())
-                {
-                    CorrectAnswers++;
-                    NextQuestion();
-                }
-                else
-                {
-                    CurrentAttempts--;
-                    ValidateCommand.Execute(null);
-
-                    if (CurrentCalculus.Attempts >= maxAttempts)
-                    {
-                        WrongAnswers++;
-                        NextQuestion();
-                    }
-                    else
-                    {
-                        AttemptsAnimationCommand.Execute(null);
-                    }
-                }
-            }
-        }
-
-        private void NextQuestion()
-        {
-            NumberOfQuestions--;
-            Answer = null;
-
-            if (CanCheck())
-            {
-                CurrentCalculus = calculationGenerator.Generate();
-                CurrentAttempts = maxAttempts;
-            }
-            else
-            {
-                ShowEnd = !CanCheck();
-            }
         }
 
         public override void Configure(object configuration)
@@ -188,6 +102,89 @@ namespace LearningNumbers.ViewModels
             }
 
             Start(calculationConfiguration);
+        }
+
+        private void Start(QuestionViewModelConfiguration configuration)
+        {
+            _calculationGenerator.Configure(configuration.CalculationConfiguration);
+
+            NumberOfQuestions = configuration.QuestionsNumber;
+            CurrentCalculus = _calculationGenerator.Generate();
+        }
+
+        private void ExecuteRemoveLastCharInAnswer()
+        {
+            Answer = _digitService.RemoveLastDigit(Answer);
+        }
+
+        private void ExecuteWriteNumberCommand(string digit)
+        {
+            Answer = _digitService.AppendDigits(Answer, digit);
+        }
+
+        private void ExecuteCheckCommand()
+        {
+            if (!HasUnansweredQuestions())
+            {
+                return;
+            }
+
+            if (IsAnswerCorrect())
+            {
+                CorrectAnswers++;
+                NextQuestion();
+            }
+            else
+            {
+                ManageWrongAnswer();
+            }
+        }
+
+        private bool IsAnswerCorrect()
+        {
+            return Answer == CurrentCalculus.Calculate();
+        }
+
+        private void ManageWrongAnswer()
+        {
+            CurrentAttempts--;
+            ValidateCommand?.Execute(null);
+
+            if (AttemptsFinished())
+            {
+                WrongAnswers++;
+                NextQuestion();
+            }
+            else
+            {
+                AttemptsAnimationCommand?.Execute(null);
+            }
+        }
+
+        private bool AttemptsFinished()
+        {
+            return CurrentAttempts <= 0;
+        }
+
+        private void NextQuestion()
+        {
+            NumberOfQuestions--;
+            Answer = null;
+
+            if (HasUnansweredQuestions())
+            {
+                CurrentCalculus = _calculationGenerator.Generate();
+                CurrentAttempts = MaxAttempts;
+            }
+            else
+            {
+                ShowEnd = true;
+            }
+        }
+
+        private bool HasUnansweredQuestions()
+        {
+            return NumberOfQuestions > 0;
         }
     }
 }

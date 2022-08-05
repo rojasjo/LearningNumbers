@@ -19,6 +19,8 @@ namespace LearningNumbers.Bootstrap
             builder.RegisterType<CalculationGenerator>()
                 .As<ICalculationGenerator>();
             
+            builder.RegisterType<DigitService>().As<IDigitService>();
+            
             builder.RegisterType<NavigationService>()
                 .As<INavigationService>();
 

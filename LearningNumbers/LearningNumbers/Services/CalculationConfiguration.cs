@@ -1,23 +1,47 @@
+using System.Collections.Generic;
+using System.Linq;
+using LearningNumbers.Models;
+
 namespace LearningNumbers.Services
 {
     public class CalculationConfiguration
     {
-        public bool CanDivide { get; set; }
+        private readonly Operator[] _operators;
 
-        public bool CanMultiply { get; set; }
+        private int _maximumNumber;
 
-        public bool CanSubtract { get; set; }
-
-        public bool CanSum { get; set; }
-
-        public int MaximumNumber { get; set; }
-
-        public bool AnyOperatorEnabled()
+        public int MaximumNumber
         {
-            return CanSum || CanDivide || CanMultiply || CanSubtract;
+            get => _maximumNumber;
+            set
+            {
+                if (value < 10)
+                {
+                    _maximumNumber = 10;
+                }
+                else if (value > 10000)
+                {
+                    _maximumNumber = 10000;
+                }
+                else
+                {
+                    _maximumNumber = value;
+                }
+            }
         }
-        
-        
+
+        public IEnumerable<Operator> Operators => _operators;
+
+        public CalculationConfiguration(IEnumerable<Operator> operators)
+        {
+            _operators = OperatorsIsEmpty(operators) ? new[] {Operator.Sum} : operators.ToArray();
+        }
+
+        private static bool OperatorsIsEmpty(IEnumerable<Operator> operators)
+        {
+            return operators == null || !operators.Any();
+        }
+
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj))
@@ -40,19 +64,15 @@ namespace LearningNumbers.Services
 
         protected bool Equals(CalculationConfiguration other)
         {
-            return CanDivide == other.CanDivide && CanMultiply == other.CanMultiply &&
-                   CanSubtract == other.CanSubtract && CanSum == other.CanSum && MaximumNumber == other.MaximumNumber;
+            return _operators.SequenceEqual(other._operators) && _maximumNumber == other._maximumNumber;
         }
-        
+
         public override int GetHashCode()
         {
             unchecked
             {
-                var hashCode = CanDivide.GetHashCode();
-                hashCode = (hashCode * 397) ^ CanMultiply.GetHashCode();
-                hashCode = (hashCode * 397) ^ CanSubtract.GetHashCode();
-                hashCode = (hashCode * 397) ^ CanSum.GetHashCode();
-                hashCode = (hashCode * 397) ^ MaximumNumber;
+                var hashCode = _operators.GetHashCode();
+                hashCode = (hashCode * 397) ^ _maximumNumber;
                 return hashCode;
             }
         }

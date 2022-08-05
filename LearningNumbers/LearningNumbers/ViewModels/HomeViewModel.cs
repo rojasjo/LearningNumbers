@@ -1,6 +1,9 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using LearningNumbers.Extensions;
+using LearningNumbers.Models;
 using LearningNumbers.Services;
 using Xamarin.Forms;
 
@@ -9,19 +12,15 @@ namespace LearningNumbers.ViewModels
     public class HomeViewModel : BaseViewModel
     {
         private bool canSum = true;
+
         public bool CanSum
         {
-            get
-            {
-                return canSum;
-            }
-            set
-            {
-                SetProperty(ref canSum, value);
-            }
+            get { return canSum; }
+            set { SetProperty(ref canSum, value); }
         }
 
         private bool canSubstract;
+
         public bool CanSubtract
         {
             get { return canSubstract; }
@@ -30,6 +29,7 @@ namespace LearningNumbers.ViewModels
 
 
         private bool canMultipilcate;
+
         public bool CanMultipilcate
         {
             get { return canMultipilcate; }
@@ -38,11 +38,12 @@ namespace LearningNumbers.ViewModels
 
 
         private bool canDivide;
+
         public bool CanDivide
         {
             get { return canDivide; }
-            set {
-
+            set
+            {
                 if (value)
                 {
                     Minimun = 100;
@@ -74,7 +75,6 @@ namespace LearningNumbers.ViewModels
 
             set
             {
-
                 if (value == true)
                 {
                     largestNumber = 10;
@@ -101,6 +101,7 @@ namespace LearningNumbers.ViewModels
                     LargestIs50 = false;
                     LargestIs100 = false;
                 }
+
                 SetProperty(ref largestIs20, value);
             }
         }
@@ -112,7 +113,6 @@ namespace LearningNumbers.ViewModels
             get { return largestIs50; }
             set
             {
-
                 if (value == true)
                 {
                     largestNumber = 50;
@@ -120,6 +120,7 @@ namespace LearningNumbers.ViewModels
                     LargestIs20 = false;
                     LargestIs100 = false;
                 }
+
                 SetProperty(ref largestIs50, value);
             }
         }
@@ -138,6 +139,7 @@ namespace LearningNumbers.ViewModels
                     LargestIs20 = false;
                     LargestIs50 = false;
                 }
+
                 SetProperty(ref largestIs100, value);
             }
         }
@@ -147,10 +149,7 @@ namespace LearningNumbers.ViewModels
         public int Minimun
         {
             get { return minimun; }
-            set {
-                SetProperty(ref minimun, value);
-            }
-
+            set { SetProperty(ref minimun, value); }
         }
 
         private int minimunMedium = 20;
@@ -158,11 +157,7 @@ namespace LearningNumbers.ViewModels
         public int MinimunMedium
         {
             get { return minimunMedium; }
-            set
-            {
-                SetProperty(ref minimunMedium, value);
-            }
-
+            set { SetProperty(ref minimunMedium, value); }
         }
 
         private int medium = 50;
@@ -170,11 +165,7 @@ namespace LearningNumbers.ViewModels
         public int Medium
         {
             get { return medium; }
-            set
-            {
-                SetProperty(ref medium, value);
-            }
-
+            set { SetProperty(ref medium, value); }
         }
 
         private int big = 100;
@@ -182,13 +173,9 @@ namespace LearningNumbers.ViewModels
         public int Big
         {
             get { return big; }
-            set
-            {
-                SetProperty(ref big, value);
-            }
-
+            set { SetProperty(ref big, value); }
         }
-        
+
         private int numberOfQuestions = 10;
 
         private bool are10Questions = true;
@@ -198,7 +185,6 @@ namespace LearningNumbers.ViewModels
             get { return are10Questions; }
             set
             {
-
                 if (value == true)
                 {
                     numberOfQuestions = 10;
@@ -225,6 +211,7 @@ namespace LearningNumbers.ViewModels
                     Are50Questions = false;
                     Are100Questions = false;
                 }
+
                 SetProperty(ref are25Questions, value);
             }
         }
@@ -236,7 +223,6 @@ namespace LearningNumbers.ViewModels
             get { return are50Questions; }
             set
             {
-
                 if (value == true)
                 {
                     numberOfQuestions = 50;
@@ -256,7 +242,6 @@ namespace LearningNumbers.ViewModels
             get { return are100Questions; }
             set
             {
-
                 if (value == true)
                 {
                     numberOfQuestions = 100;
@@ -273,30 +258,29 @@ namespace LearningNumbers.ViewModels
 
         public HomeViewModel(INavigationService navigation) : base(navigation)
         {
-            PlayCommand = new Command( async () => await ExecutePlayCommand());
+            PlayCommand = new Command(async () => await ExecutePlayCommand());
         }
 
         private Task ExecutePlayCommand()
         {
+            var operators = new HashSet<Operator>();
+
+            operators.AddOperators(CanDivide, CanMultipilcate, CanSubtract, CanSum);
+
             var configuration = new QuestionViewModelConfiguration()
             {
                 QuestionsNumber = numberOfQuestions,
-                CalculationConfiguration = new CalculationConfiguration
+                CalculationConfiguration = new CalculationConfiguration(operators)
                 {
-                    CanDivide = canDivide,
-                    CanSum = canSum,
-                    CanSubtract = canSubstract,
-                    CanMultiply = canMultipilcate,
                     MaximumNumber = largestNumber
                 }
             };
-            
-            return NavigationService.GoToQuestions(configuration); 
+
+            return NavigationService.GoToQuestions(configuration);
         }
 
         public override void Configure(object configuration)
         {
-            
         }
     }
 }
