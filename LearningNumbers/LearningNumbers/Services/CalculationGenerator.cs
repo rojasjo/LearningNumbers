@@ -27,7 +27,7 @@ namespace LearningNumbers.Services
 
             var calculation = CalculationFactory.CreateCalculation(randomOperator);  
             
-            calculation.Accept(new CalculationVisitor(_maxNumber));
+            calculation.Accept(new OperandsVisitor(_maxNumber));
             
             return calculation;
         }

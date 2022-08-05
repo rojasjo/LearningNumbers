@@ -23,7 +23,6 @@ namespace LearningNumbers.Behaviors
 
         protected override void OnAttachedTo(Label bindable)
         {
-            base.OnAttachedTo(bindable);
             AssociatedObject = bindable;
             bindable.BindingContextChanged += OnBindingContextChanged;
 

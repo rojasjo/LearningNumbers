@@ -6,8 +6,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="LearningNumbers.Views.HomeView"
-             xmlns:ui="clr-namespace:LearningNumbers.CustomElements"
              xmlns:utility="clr-namespace:LearningNumbers.Utilities;assembly=LearningNumbers"
+             xmlns:controls="clr-namespace:LearningNumbers.Controls;assembly=LearningNumbers"
              utility:ViewModelLocator.AutoWireViewModel="True"
              BackgroundColor="#0f0f0f"
              Title="Esercita i caloli"
@@ -38,7 +38,7 @@
                        Style="{StaticResource LargeLabel}">
                 </Label>
                 
-                <ui:ToggleButton
+                <controls:ToggleButton
                     Grid.Row="1"
                     Grid.Column="0"
                     Text="+"
@@ -48,21 +48,21 @@
                     
                     />
                 
-                <ui:ToggleButton Grid.Row="1"
+                <controls:ToggleButton Grid.Row="1"
                                  Grid.Column="1"
                                  Text="-"
                                  IsToggled="{Binding CanSubtract, Mode=TwoWay}"
                                  Style="{StaticResource ToggleButtonHeader}"
                                  FontSize="100"/>
 
-                <ui:ToggleButton Grid.Row="1"
+                <controls:ToggleButton Grid.Row="1"
                                  Grid.Column="2"
                                  Text="×"
                                  IsToggled="{Binding CanMultipilcate, Mode=TwoWay}"
                                  Style="{StaticResource ToggleButtonHeader}"
                                  FontSize="100"/>
 
-                <ui:ToggleButton Grid.Row="1"
+                <controls:ToggleButton Grid.Row="1"
                                  Grid.Column="3"
                                  Text="÷"
                                  IsToggled="{Binding CanDivide, Mode=TwoWay}"
@@ -76,25 +76,25 @@
                        Style="{StaticResource LargeLabel}"
                        VerticalTextAlignment="Center"/>
 
-                <ui:ToggleButton Grid.Row="3"
+                <controls:ToggleButton Grid.Row="3"
                                  Grid.Column="0"
                                  Text="{Binding Minimun}"
                                  IsToggled="{Binding LargestIs10, Mode=TwoWay}"
                                  Style="{StaticResource ToggleButtonLarge}" />
 
-                <ui:ToggleButton Grid.Row="3"
+                <controls:ToggleButton Grid.Row="3"
                                  Grid.Column="1"
                                  Text="{Binding MinimunMedium}"
                                  IsToggled="{Binding LargestIs20, Mode=TwoWay}"
                                  Style="{StaticResource ToggleButtonLarge}" />
 
-                <ui:ToggleButton Grid.Row="3"
+                <controls:ToggleButton Grid.Row="3"
                                  Grid.Column="2"
                                  Text="{Binding Medium}"
                                  IsToggled="{Binding LargestIs50, Mode=TwoWay}"
                                  Style="{StaticResource ToggleButtonLarge}" />
 
-                <ui:ToggleButton Grid.Row="3"
+                <controls:ToggleButton Grid.Row="3"
                                  Grid.Column="3"
                                  Text="{Binding Big}"
                                  IsToggled="{Binding LargestIs100, Mode=TwoWay}"
@@ -107,25 +107,25 @@
                        Style="{StaticResource LargeLabel}"
                        VerticalTextAlignment="Center"/>
 
-                <ui:ToggleButton Grid.Row="5"
+                <controls:ToggleButton Grid.Row="5"
                                  Grid.Column="0"
                                  Text="10"
                                  IsToggled="{Binding Are10Questions, Mode=TwoWay}"
                                  Style="{StaticResource ToggleButtonLarge}" />
 
-                <ui:ToggleButton Grid.Row="5"
+                <controls:ToggleButton Grid.Row="5"
                                  Grid.Column="1"
                                  Text="25"
                                  IsToggled="{Binding Are25Questions, Mode=TwoWay}"
                                  Style="{StaticResource ToggleButtonLarge}" />
 
-                <ui:ToggleButton Grid.Row="5"
+                <controls:ToggleButton Grid.Row="5"
                                  Grid.Column="2"
                                  Text="50"
                                  IsToggled="{Binding Are50Questions, Mode=TwoWay}"
                                  Style="{StaticResource ToggleButtonLarge}" />
 
-                <ui:ToggleButton Grid.Row="5"
+                <controls:ToggleButton Grid.Row="5"
                                  Grid.Column="3"
                                  Text="100"
                                  IsToggled="{Binding Are100Questions, Mode=TwoWay}"

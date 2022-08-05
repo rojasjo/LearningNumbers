@@ -7,6 +7,8 @@ namespace LearningNumbers.Models
     {
         public override int Second
         {
+            get => base.Second;
+            
             set
             {
                 if (value == 0)

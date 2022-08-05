@@ -3,9 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:LearningNumbers.Controls;assembly=LearningNumbers"
              mc:Ignorable="d"
-             x:Class="LearningNumbers.App"
-             xmlns:ui="clr-namespace:LearningNumbers.CustomElements">
+             x:Class="LearningNumbers.App">
 
     <Application.Resources>
         <ResourceDictionary>
@@ -63,7 +63,7 @@
             </Style>
             
 
-            <Style x:Key="ToggleButtonHeader" TargetType="ui:ToggleButton">
+            <Style x:Key="ToggleButtonHeader" TargetType="controls:ToggleButton">
                 <Setter Property="FontFamily" Value="LuckiestGuy" />
                 <Setter Property="FontSize" Value="Header"/>
                 <Setter Property="VisualStateManager.VisualStateGroups">
@@ -86,7 +86,7 @@
                 </Setter>
             </Style>
 
-            <Style x:Key="ToggleButtonLarge" TargetType="ui:ToggleButton">
+            <Style x:Key="ToggleButtonLarge" TargetType="controls:ToggleButton">
                 <Setter Property="FontFamily" Value="LuckiestGuy"  />
                 <Setter Property="FontSize" Value="Large"/>
                 <!-- ON UWP mouse hover is not good <Setter Property="ButtonBackgroundPointerOver" Value="#149BE8"/> -->

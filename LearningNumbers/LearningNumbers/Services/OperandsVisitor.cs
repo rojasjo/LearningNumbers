@@ -3,7 +3,7 @@ using LearningNumbers.Models;
 
 namespace LearningNumbers.Services
 {
-    public class CalculationVisitor : IVisitor
+    public class OperandsVisitor : IVisitor
     {
         private readonly int _maxNumber;
 
@@ -12,7 +12,7 @@ namespace LearningNumbers.Services
         private int _first;
         private int _second;
 
-        public CalculationVisitor(int maxNumber)
+        public OperandsVisitor(int maxNumber)
         {
             _random = new Random();
             _maxNumber = maxNumber;

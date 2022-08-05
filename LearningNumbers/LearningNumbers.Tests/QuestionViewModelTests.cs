@@ -5,7 +5,6 @@ using LearningNumbers.Extensions;
 using LearningNumbers.Models;
 using LearningNumbers.Services;
 using LearningNumbers.Tests.Helpers;
-using LearningNumbers.Utilities;
 using LearningNumbers.ViewModels;
 using Moq;
 using NUnit.Framework;
@@ -75,7 +74,7 @@ namespace LearningNumbers.Tests
         [Test]
         public void Configure_Configured10QuestionsNotAnsweredToAnyQuestion_ShowEndIsFalse()
         {
-            _calculationGeneratorMock.SetupSum(Operator.Sum, 10, 20);
+            _calculationGeneratorMock.SetupSum(10, 20);
 
             _systemUnderTest.Configure(new QuestionViewModelConfiguration {QuestionsNumber = 10});
 
@@ -85,7 +84,7 @@ namespace LearningNumbers.Tests
         [Test]
         public void Configure_Configured10QuestionsNotAnsweredToAnyQuestion_CurrentAttemptsAreThree()
         {
-            _calculationGeneratorMock.SetupSum(Operator.Sum, 10, 20);
+            _calculationGeneratorMock.SetupSum(10, 20);
 
             _systemUnderTest.Configure(new QuestionViewModelConfiguration {QuestionsNumber = 10});
 
@@ -95,7 +94,7 @@ namespace LearningNumbers.Tests
         [Test]
         public void Configure_Configured10QuestionsNotAnsweredToAnyQuestion_WrongAnswerAreZero()
         {
-            _calculationGeneratorMock.SetupSum(Operator.Sum, 10, 20);
+            _calculationGeneratorMock.SetupSum(10, 20);
 
             _systemUnderTest.Configure(new QuestionViewModelConfiguration {QuestionsNumber = 10});
 
@@ -105,7 +104,7 @@ namespace LearningNumbers.Tests
         [Test]
         public void Configure_Configured10QuestionsNotAnsweredToAnyQuestion_CorrectAnswerAreZero()
         {
-            _calculationGeneratorMock.SetupSum(Operator.Sum, 10, 20);
+            _calculationGeneratorMock.SetupSum(10, 20);
 
             _systemUnderTest.Configure(new QuestionViewModelConfiguration {QuestionsNumber = 10});
 
@@ -116,7 +115,7 @@ namespace LearningNumbers.Tests
         public void
             CheckAnswerCommand_Configured10QuestionsAnsweredCorrectlyToAllQuestions100Times_GeneratedOnly10Questions()
         {
-            _calculationGeneratorMock.SetupSum(Operator.Sum, 10, 20);
+            _calculationGeneratorMock.SetupSum(10, 20);
 
             ConfigureQuestionsAndAnswer(30, 10, 100);
 
@@ -126,7 +125,7 @@ namespace LearningNumbers.Tests
         [Test]
         public void CheckAnswerCommand_AnsweredCorrectlyToAllQuestions_ShowEndIsTrue()
         {
-            _calculationGeneratorMock.SetupSum(Operator.Sum, 10, 20);
+            _calculationGeneratorMock.SetupSum(10, 20);
 
             ConfigureQuestionsAndAnswer(30);
 
@@ -136,7 +135,7 @@ namespace LearningNumbers.Tests
         [Test]
         public void CheckAnswerCommand_AnsweredCorrectlyToAllQuestions_CorrectAnswerAre10()
         {
-            _calculationGeneratorMock.SetupSum(Operator.Sum, 10, 20);
+            _calculationGeneratorMock.SetupSum(10, 20);
 
             ConfigureQuestionsAndAnswer(30);
 
@@ -146,7 +145,7 @@ namespace LearningNumbers.Tests
         [Test]
         public void CheckAnswerCommand_AnsweredCorrectlyToAllQuestions_WrongAnswerAreZero()
         {
-            _calculationGeneratorMock.SetupSum(Operator.Sum, 10, 20);
+            _calculationGeneratorMock.SetupSum(10, 20);
 
             ConfigureQuestionsAndAnswer(30);
 
@@ -156,7 +155,7 @@ namespace LearningNumbers.Tests
         [Test]
         public void CheckAnswerCommand_AnsweredCorrectlyToAllQuestions_NumberOfQuestionsIsZero()
         {
-            _calculationGeneratorMock.SetupSum(Operator.Sum, 10, 20);
+            _calculationGeneratorMock.SetupSum(10, 20);
 
             ConfigureQuestionsAndAnswer(30);
 
@@ -169,7 +168,7 @@ namespace LearningNumbers.Tests
         public void CheckAnswerCommand_WrongAttempts_CurrentAttemptsIsCorrect(int answersNumber,
             int expectedCurrentAttempts)
         {
-            _calculationGeneratorMock.SetupSum(Operator.Sum, 10, 20);
+            _calculationGeneratorMock.SetupSum(10, 20);
 
             ConfigureQuestionsAndAnswer(10, 10, answersNumber);
 
@@ -182,7 +181,7 @@ namespace LearningNumbers.Tests
         public void CheckAnswerCommand_ConfiguredTenQuestionsWrongAttempts_NumberOfQuestionIsTen(int answersNumber,
             int expectedCurrentAttempts)
         {
-            _calculationGeneratorMock.SetupSum(Operator.Sum, 10, 20);
+            _calculationGeneratorMock.SetupSum(10, 20);
 
             ConfigureQuestionsAndAnswer(10, 10, answersNumber);
 
@@ -192,7 +191,7 @@ namespace LearningNumbers.Tests
         [Test]
         public void CheckAnswerCommand_OneQuestionIsAnsweredWrong_CurrentAttemptsAreResetToThree()
         {
-            _calculationGeneratorMock.SetupSum(Operator.Sum, 10, 20);
+            _calculationGeneratorMock.SetupSum(10, 20);
 
             ConfigureQuestionsAndAnswer(10, 10, 3);
 
@@ -202,7 +201,7 @@ namespace LearningNumbers.Tests
         [Test]
         public void CheckAnswerCommand_OneQuestionIsAnsweredWrong_WrongAnswersIsOne()
         {
-            _calculationGeneratorMock.SetupSum(Operator.Sum, 10, 20);
+            _calculationGeneratorMock.SetupSum(10, 20);
 
             ConfigureQuestionsAndAnswer(10, 10, 3);
 
@@ -212,7 +211,7 @@ namespace LearningNumbers.Tests
         [Test]
         public void CheckAnswerCommand_OneQuestionIsAnsweredWrong_NumberOfQuestionsIsDecreased()
         {
-            _calculationGeneratorMock.SetupSum(Operator.Sum, 10, 20);
+            _calculationGeneratorMock.SetupSum(10, 20);
 
             ConfigureQuestionsAndAnswer(10, 10, 3);
 
@@ -222,7 +221,7 @@ namespace LearningNumbers.Tests
         [Test]
         public void CheckAnswerCommand_OneQuestionIsAnsweredWrong_TwoCalculationGenerated()
         {
-            _calculationGeneratorMock.SetupSum(Operator.Sum, 10, 20);
+            _calculationGeneratorMock.SetupSum(10, 20);
 
             ConfigureQuestionsAndAnswer(10, 10, 3);
 
@@ -235,7 +234,7 @@ namespace LearningNumbers.Tests
             var commandMock = new Mock<ICommand>();
             _systemUnderTest.ValidateCommand = commandMock.Object;
 
-            _calculationGeneratorMock.SetupSum(Operator.Sum, 10, 20);
+            _calculationGeneratorMock.SetupSum(10, 20);
 
             ConfigureQuestionsAndAnswer(10, 10, 3);
 
@@ -248,7 +247,7 @@ namespace LearningNumbers.Tests
             var commandMock = new Mock<ICommand>();
             _systemUnderTest.AttemptsAnimationCommand = commandMock.Object;
 
-            _calculationGeneratorMock.SetupSum(Operator.Sum, 10, 20);
+            _calculationGeneratorMock.SetupSum(10, 20);
 
             ConfigureQuestionsAndAnswer(10, 10, 3);
 

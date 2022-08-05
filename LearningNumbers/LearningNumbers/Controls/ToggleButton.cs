@@ -1,7 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 
-namespace LearningNumbers.CustomElements
+namespace LearningNumbers.Controls
 {
     public class ToggleButton : Button
     {

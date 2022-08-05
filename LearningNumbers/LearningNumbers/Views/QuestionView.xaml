@@ -9,9 +9,15 @@
              xmlns:utility="clr-namespace:LearningNumbers.Utilities;assembly=LearningNumbers"
              utility:ViewModelLocator.AutoWireViewModel="True"
              xmlns:behaviors="clr-namespace:LearningNumbers.Behaviors;assembly=LearningNumbers"
+             xmlns:converters="clr-namespace:LearningNumbers.Converters;assembly=LearningNumbers"
              BackgroundColor="#0f0f0f"
              Title="Domanda"
              Padding="0, 20">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:SymbolConverter x:Key="SymbolConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout Margin="10" VerticalOptions="FillAndExpand">
             <Grid VerticalOptions="FillAndExpand">
@@ -27,7 +33,8 @@
                                 <FormattedString.Spans>
                                     <Span Text="{Binding CurrentCalculus.First, Mode=TwoWay}" />
                                     <Span Text=" " />
-                                    <Span Text="{Binding CurrentCalculus.Symbol, Mode=TwoWay}" />
+                                    <Span
+                                        Text="{Binding CurrentCalculus.Symbol, Mode=TwoWay, Converter={StaticResource SymbolConverter}}" />
                                     <Span Text=" " />
                                     <Span Text="{Binding CurrentCalculus.Second, Mode=TwoWay}" />
                                     <Span Text=" = " />

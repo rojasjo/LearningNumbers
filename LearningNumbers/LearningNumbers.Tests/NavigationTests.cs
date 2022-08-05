@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using LearningNumbers.Bootstrap;
 using LearningNumbers.Models;
 using LearningNumbers.Services;
-using LearningNumbers.Utilities;
 using LearningNumbers.ViewModels;
 using Moq;
 using NUnit.Framework;
