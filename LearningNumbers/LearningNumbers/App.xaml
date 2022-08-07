@@ -89,7 +89,6 @@
             <Style x:Key="ToggleButtonLarge" TargetType="controls:ToggleButton">
                 <Setter Property="FontFamily" Value="LuckiestGuy"  />
                 <Setter Property="FontSize" Value="Large"/>
-                <!-- ON UWP mouse hover is not good <Setter Property="ButtonBackgroundPointerOver" Value="#149BE8"/> -->
                 <Setter Property="VisualStateManager.VisualStateGroups">
                     <VisualStateGroupList>
                         <VisualStateGroup Name="ToggleStates">
