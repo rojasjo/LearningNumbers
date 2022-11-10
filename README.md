@@ -11,14 +11,14 @@ The app is written in C# using Xamarin.Form framework.
 ### Try it on your favorite platform
 
 #### iOS
-<a href="https://play.google.com/store/apps/details?id=ch.joserojas.learningnumbers">
-         <img alt="Qries" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Download_on_the_App_Store_Badge.svg/135px-Download_on_the_App_Store_Badge.svg.png?20170219160111">
+<a href="https://apps.apple.com/app/1638616060">
+         <img alt="Learning numbers on App Store" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Download_on_the_App_Store_Badge.svg/135px-Download_on_the_App_Store_Badge.svg.png?20170219160111">
 </a> 
 
 #### Android
 
-<a href="https://apps.apple.com/app/1638616060">
-         <img alt="Qries" src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png"
+<a href="https://play.google.com/store/apps/details?id=ch.joserojas.learningnumbers">
+         <img alt="Learning numbers on Google Play Store" src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png"
          width=150" height="60">
 </a>
 
