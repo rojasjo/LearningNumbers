@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xaml-comp compile="true" ?>
+
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:LearningNumbers.Maui.Controls">
+
+    <!--Global Styles-->
+    <Color x:Key="NavigationPrimary">#149BE8</Color>
+    <Style TargetType="NavigationPage">
+        <Setter Property="BarBackgroundColor" Value="{StaticResource NavigationPrimary}" />
+        <Setter Property="BarTextColor" Value="#fff" />
+    </Style>
+    <Style x:Key="LargeLabel" TargetType="Label">
+        <Setter Property="FontFamily" Value="LuckiestGuy" />
+        <Setter Property="FontSize" Value="Large" />
+        <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+        <Setter Property="VerticalOptions" Value="FillAndExpand" />
+        <Setter Property="TextColor" Value="#fff" />
+        
+    </Style>
+
+    <Style x:Key="CalculusLabel" TargetType="Label">
+        <Setter Property="FontFamily" Value="LuckiestGuy" />
+        <Setter Property="FontSize" Value="50" />
+        <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+        <Setter Property="TextColor" Value="#fff" />
+    </Style>
+
+    <Style x:Key="CalculusButton" TargetType="Button">
+        <Setter Property="FontFamily" Value="LuckiestGuy" />
+        <Setter Property="FontSize" Value="35" />
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+        <Setter Property="VerticalOptions" Value="FillAndExpand" />
+        <Setter Property="TextColor" Value="#fff" />
+        <Setter Property="BackgroundColor" Value="#73BCE6" />
+
+    </Style>
+    <Style x:Key="Entry" TargetType="Entry">
+        <Setter Property="FontFamily" Value="LuckiestGuy" />
+        <Setter Property="FontSize" Value="Header" />
+        <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+        <Setter Property="TextColor" Value="#000" />
+    </Style>
+
+    <Style x:Key="ButtonLarge" TargetType="Button">
+        <Setter Property="FontFamily" Value="LuckiestGuy" />
+        <Setter Property="FontSize" Value="Large" />
+        <Setter Property="BackgroundColor" Value="#73BCE6" />
+    </Style>
+    <Style x:Key="ButtonTitle" TargetType="Button">
+        <Setter Property="FontFamily" Value="LuckiestGuy" />
+        <Setter Property="FontSize" Value="Header" />
+        <Setter Property="BackgroundColor" Value="#73BCE6" />
+    </Style>
+    <Style x:Key="ButtonTitleOrange" TargetType="Button">
+        <Setter Property="FontFamily" Value="LuckiestGuy" />
+        <Setter Property="FontSize" Value="Header" />
+        <Setter Property="BackgroundColor" Value="#FFA500" />
+    </Style>
+
+
+    <Style x:Key="ToggleButtonHeader" TargetType="controls:ToggleButton">
+        <Setter Property="FontFamily" Value="LuckiestGuy" />
+        <Setter Property="FontSize" Value="Header" />
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup Name="ToggleStates">
+                    <VisualState Name="ToggledOff">
+                        <VisualState.Setters>
+                            <Setter Property="BackgroundColor" Value="#73BCE6" />
+                            <Setter Property="TextColor" Value="#000" />
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState Name="ToggledOn">
+                        <VisualState.Setters>
+                            <Setter Property="BackgroundColor" Value="#149BE8" />
+                            <Setter Property="TextColor" Value="#FFA500" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ToggleButtonLarge" TargetType="controls:ToggleButton">
+        <Setter Property="FontFamily" Value="LuckiestGuy" />
+        <Setter Property="FontSize" Value="Large" />
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup Name="ToggleStates">
+                    <VisualState Name="ToggledOff">
+                        <VisualState.Setters>
+                            <Setter Property="BackgroundColor" Value="#73BCE6" />
+                            <Setter Property="TextColor" Value="#000" />
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState Name="ToggledOn">
+                        <VisualState.Setters>
+                            <Setter Property="BackgroundColor" Value="#149BE8" />
+                            <Setter Property="TextColor" Value="#FFA500" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+</ResourceDictionary>
