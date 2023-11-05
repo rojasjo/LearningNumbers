@@ -16,7 +16,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\LearningNumber.Core\LearningNumber.Core.csproj" />
-      <ProjectReference Include="..\LearningNumbers.Core\LearningNumber.Core.csproj" />
+      <ProjectReference Include="..\LearningNumbers.Core\LearningNumbers.Core.csproj" />
     </ItemGroup>
 </Project>
