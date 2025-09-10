@@ -1,10 +1,7 @@
 ﻿using LearningNumber.Core.Services;
 using LearningNumber.Core.ViewModels;
 using LearningNumbers.Maui.Services;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Maui.Controls.Hosting;
-using Microsoft.Maui.Hosting;
 
 namespace LearningNumbers.Maui;
 

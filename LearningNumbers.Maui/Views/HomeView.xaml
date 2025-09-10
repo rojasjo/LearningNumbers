@@ -14,7 +14,8 @@
 
     <ContentPage.Content>
         <StackLayout Margin="10">
-            <Grid VerticalOptions="FillAndExpand">
+            <Grid VerticalOptions="FillAndExpand"
+                  ColumnSpacing="3">
                 <Grid.RowDefinitions>
                     <RowDefinition />
                     <RowDefinition Height="3*" />
