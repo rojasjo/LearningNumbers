@@ -18,7 +18,7 @@
     </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout Margin="10" VerticalOptions="FillAndExpand">
-            <Grid VerticalOptions="FillAndExpand">
+            <Grid VerticalOptions="FillAndExpand" RowSpacing="3">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
@@ -29,21 +29,22 @@
                         <Label.FormattedText>
                             <FormattedString>
                                 <FormattedString.Spans>
-                                    <Span Text="{Binding CurrentCalculus.First, Mode=TwoWay}" />
+                                    <Span Text="{Binding CurrentCalculus.First, Mode=TwoWay}" FontFamily="LuckiestGuy" />
                                     <Span Text=" " />
                                     <Span
-                                        Text="{Binding CurrentCalculus.Symbol, Mode=TwoWay, Converter={StaticResource SymbolConverter}}" />
+                                        Text="{Binding CurrentCalculus.Symbol, Mode=TwoWay, Converter={StaticResource SymbolConverter}}"
+                                        FontFamily="LuckiestGuy" />
                                     <Span Text=" " />
-                                    <Span Text="{Binding CurrentCalculus.Second, Mode=TwoWay}" />
-                                    <Span Text=" = " />
-                                    <Span Text="???" TextColor="#FFA500" />
+                                    <Span Text="{Binding CurrentCalculus.Second, Mode=TwoWay}" FontFamily="LuckiestGuy" />
+                                    <Span Text=" = " FontFamily="LuckiestGuy" />
+                                    <Span Text="???" TextColor="#FFA500" FontFamily="LuckiestGuy" />
                                 </FormattedString.Spans>
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>
-                    <Frame Grid.Row="1" BackgroundColor="White"
-                           HeightRequest="50">
-                        <Label Grid.Row="1" HorizontalOptions="End"
+                    <Border Grid.Row="1" BackgroundColor="White"
+                           HeightRequest="75">
+                        <Label Grid.Row="1" HorizontalOptions="End" Margin="0" Padding="0"
                                VerticalOptions="Center"
                                Style="{StaticResource CalculusLabel}"
                                Text="{Binding Answer}"
@@ -53,7 +54,7 @@
                                     Shake="{Binding ValidateCommand}" />
                             </Label.Behaviors>
                         </Label>
-                    </Frame>
+                    </Border>
 
                     <Label Grid.Row="2"
                            Style="{StaticResource CalculusLabel}"
@@ -63,9 +64,9 @@
                         <Label.FormattedText>
                             <FormattedString>
                                 <FormattedString.Spans>
-                                    <Span Text="Ancora " />
-                                    <Span Text="{Binding CurrentAttempts, Mode=TwoWay}" />
-                                    <Span Text=" tentativi" />
+                                    <Span Text="Ancora "  FontFamily="LuckiestGuy" />
+                                    <Span Text="{Binding CurrentAttempts, Mode=TwoWay}" FontFamily="LuckiestGuy"  />
+                                    <Span Text=" tentativi" FontFamily="LuckiestGuy"  />
                                 </FormattedString.Spans>
                             </FormattedString>
                         </Label.FormattedText>
@@ -74,7 +75,7 @@
                         </Label.Behaviors>
                     </Label>
                 </StackLayout>
-                <Grid Grid.Row="1">
+                <Grid Grid.Row="1" RowSpacing="3" ColumnSpacing="3">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
@@ -164,8 +165,8 @@
                         <Label.FormattedText>
                             <FormattedString>
                                 <FormattedString.Spans>
-                                    <Span Text="Da fare: " />
-                                    <Span Text="{Binding NumberOfQuestions, Mode=TwoWay}" />
+                                    <Span Text="Da fare: " FontFamily="LuckiestGuy" />
+                                    <Span Text="{Binding NumberOfQuestions, Mode=TwoWay}" FontFamily="LuckiestGuy" />
                                 </FormattedString.Spans>
                             </FormattedString>
                         </Label.FormattedText>
@@ -177,8 +178,8 @@
                         <Label.FormattedText>
                             <FormattedString>
                                 <FormattedString.Spans>
-                                    <Span Text="Giusti : " />
-                                    <Span Text="{Binding CorrectAnswers, Mode=TwoWay}" />
+                                    <Span Text="Giusti : " FontFamily="LuckiestGuy" />
+                                    <Span Text="{Binding CorrectAnswers, Mode=TwoWay}" FontFamily="LuckiestGuy" />
                                 </FormattedString.Spans>
                             </FormattedString>
                         </Label.FormattedText>
@@ -190,8 +191,8 @@
                         <Label.FormattedText>
                             <FormattedString>
                                 <FormattedString.Spans>
-                                    <Span Text="Sbagliati : " />
-                                    <Span Text="{Binding WrongAnswers, Mode=TwoWay}" />
+                                    <Span Text="Sbagliati : "  FontFamily="LuckiestGuy"/>
+                                    <Span Text="{Binding WrongAnswers, Mode=TwoWay}" FontFamily="LuckiestGuy" />
                                 </FormattedString.Spans>
                             </FormattedString>
                         </Label.FormattedText>

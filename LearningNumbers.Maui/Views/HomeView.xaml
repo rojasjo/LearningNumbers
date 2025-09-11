@@ -15,8 +15,8 @@
     <ContentPage.Content>
         <StackLayout Margin="10">
             <Grid VerticalOptions="FillAndExpand"
-                  ColumnSpacing="3">
-                <Grid.RowDefinitions>
+                  ColumnSpacing="3" RowSpacing="2">
+                <Grid.RowDefinitions >
                     <RowDefinition />
                     <RowDefinition Height="3*" />
                     <RowDefinition />
@@ -132,7 +132,7 @@
                                  IsToggled="{Binding Are100Questions, Mode=TwoWay}"
                                  Style="{StaticResource ToggleButtonLarge}" />
 
-                <Button Grid.Row="6" Grid.Column="0"
+                <Button Grid.Row="6" Grid.Column="0" Margin="2"
                         Grid.ColumnSpan="4"
                         FontSize="Title"
                         Text="Gioca!"
