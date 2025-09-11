@@ -102,14 +102,24 @@ namespace LearningNumber.Core.ViewModels
             NumberOfQuestions = configuration.QuestionsNumber;
             CurrentCalculus = _calculationGenerator.Generate();
         }
-        
+
         private void ExecuteRemoveLastCharInAnswer()
         {
+            if (ShowEnd)
+            {
+                return;
+            }
+
             Answer = _digitService.RemoveLastDigit(Answer);
         }
 
         private void ExecuteWriteNumberCommand(string digit)
         {
+            if (ShowEnd)
+            {
+                return;
+            }
+
             Answer = _digitService.AppendDigits(Answer, digit);
         }
 
